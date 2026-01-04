@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "oncocyrix-multicohort"
+version = "0.1.0"
+description = "Single-cell RNA-seq multicohort analysis pipeline with Scanpy (10x-only, CAR-T aware, structured outputs)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" } 
+
+authors = [
+  { name = "Sheryar Malik" }
+]
+
+keywords = [
+  "single-cell", "scRNA-seq", "scanpy", "anndata", "10x", "multicohort",
+  "celltypist", "bbknn", "deseq2", "gseapy", "CAR-T"
+]
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Bio-Informatics"
+]
+
+# Core deps = what your script imports unconditionally
+dependencies = [
+  "scanpy>=1.9.6",
+  "anndata>=0.9.2",
+  "numpy>=1.23",
+  "pandas>=1.5",
+  "scipy>=1.9",
+  "matplotlib>=3.7",
+  "openpyxl>=3.1",      # you read metadata.xlsx
+  "tqdm>=4.66"          # helpful for future progress bars/logging
+]
+
+[project.optional-dependencies]
+# Optional modules in your code (enabled if installed)
+mygene = ["mygene>=3.2.2"]
+enrichr = ["gseapy>=1.1.2"]                # run_enrichr_multidb + gseapy enrichment
+celltypist = ["celltypist>=1.5.0"]         # ML annotation branch
+integration = ["bbknn>=1.6.0"]             # scanpy.external bbknn integration
+deseq2 = ["rpy2>=3.5.10"]                  # DESeq2 via rpy2 (R itself still required)
+semantic_dedup = [
+  "sentence-transformers>=2.2.2",
+  "faiss-cpu>=1.7.4"
+]
+
+# A convenient "all-in" extra for your full pipeline experience
+all = [
+  "mygene>=3.2.2",
+  "gseapy>=1.1.2",
+  "celltypist>=1.5.0",
+  "bbknn>=1.6.0",
+  "rpy2>=3.5.10",
+  "sentence-transformers>=2.2.2",
+  "faiss-cpu>=1.7.4"
+]
+
+[project.scripts]
+oncocyrix-multicohort = "oncocyrix_multicohort.pipeline:main"
+
+
+
+# ---- setuptools config (recommended) ----
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["oncocyrix_multicohort*"]
