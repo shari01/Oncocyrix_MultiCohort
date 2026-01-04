@@ -148,6 +148,8 @@ oncocyrix-multicohort --mode multi \
 <hr/>
 
 <h2>Output Structure</h2>
+<h2>Output-results</h2>
+https://drive.google.com/drive/folders/1hURfwj2z8Vqqn0QIdR1omaxPqWwfSDhs?usp=sharing
 
 <pre><code>
 SC_ANALYSIS_RESULTS/
